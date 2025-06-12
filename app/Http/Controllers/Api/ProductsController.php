@@ -30,6 +30,7 @@ class ProductsController extends Controller
         $validator = FacadesValidator::make($request->all(), [
             'name' => 'required',
             'price' => 'required',
+            'stock' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -62,6 +63,7 @@ class ProductsController extends Controller
         $validator = FacadesValidator::make($request->all(), [
             'name' => 'required',
             'price' => 'required',
+            'stock' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -73,6 +75,7 @@ class ProductsController extends Controller
             $product->update([
                 'name' => $request->name,
                 'price' => $request->price,
+                'stock' => $request->stock,
             ]);
 
             return new productResource($product, "Success", "Product Edited Successfully");
@@ -93,5 +96,19 @@ class ProductsController extends Controller
         } else {
             return new productResource(null, "Failed", "product Not Found");
         }
+    }
+
+    public function decreaseStock(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if ($product->stock < $request->quantity) {
+            return response()->json(['message' => 'Stok tidak cukup'], 400);
+        }
+
+        $product->stock -= $request->quantity;
+        $product->save();
+
+        return response()->json(['message' => 'Stok berhasil dikurangi']);
     }
 }

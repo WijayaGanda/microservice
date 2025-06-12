@@ -32,11 +32,13 @@ class ProductsController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|string|max:20',
+            'stock' => 'required|string|max:20',
         ]);
 
         Product::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
+            'stock' => $request->input('stock'),
         ]);
 
 
@@ -83,8 +85,8 @@ class ProductsController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $orders = Http::get('http://127.0.0.1:8002/api/orders-api')->json()['data'];
-        $customers = Http::get('http://127.0.0.1:8000/api/customers-api')->json()['data'];
+        $orders = Http::get('http://nginx-order/api/orders-api')->json()['data'];
+        $customers = Http::get('http://nginx-customer/api/customers-api')->json()['data'];
 
         $filteredOrders = collect($orders)->where('product_id', $id);
 

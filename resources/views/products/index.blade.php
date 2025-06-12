@@ -37,6 +37,7 @@
                 <th>Id</th>
                 <th>Nama</th>
                 <th>Price</th>
+                <th>Stok</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -65,6 +66,9 @@
                     },
                     {
                         data: 'price'
+                    },
+                    {
+                        data: 'stock'
                     },
                     {
                         data: null,

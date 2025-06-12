@@ -25,7 +25,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="phone" name="price" placeholder="Input Product Price">
+                    <input type="number" class="form-control" id="phone" name="price" placeholder="Input Product Price" min=1>
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stok</label>
+                    <input type="number" class="form-control" id="stock" name="stock" placeholder="Input Product Price" min=1>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="submit"
                         class="btn btn-success text-end">Submit</button>
